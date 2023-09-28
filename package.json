@@ -14,12 +14,17 @@
     "nuxt": "^3.7.4"
   },
   "dependencies": {
+    "@prisma/client": "5.3.1",
     "@tiptap/extension-table": "^2.1.11",
     "@tiptap/extension-table-cell": "^2.1.11",
     "@tiptap/extension-table-header": "^2.1.11",
     "@tiptap/extension-table-row": "^2.1.11",
     "@tiptap/pm": "^2.1.11",
     "@tiptap/starter-kit": "^2.1.11",
-    "@tiptap/vue-3": "^2.1.11"
+    "@tiptap/vue-3": "^2.1.11",
+    "graphql": "^16.8.1",
+    "graphql-type-json": "^0.3.2",
+    "graphql-yoga": "^4.0.4",
+    "prisma": "^5.3.1"
   }
 }
