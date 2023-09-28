@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "prod": "cross-env PORT=80 bunx pm2 start .output/server/index.mjs -i 2"
+    "linux": "bunx pm2 start .output/server/index.mjs -i 2"
 
   },
   "devDependencies": {
