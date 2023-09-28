@@ -7,24 +7,26 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prod": "cross-env PORT=80 bunx pm2 start .output/server/index.mjs -i 2"
+
   },
   "devDependencies": {
-    "@bg-dev/nuxt-naiveui": "^1.4.6",
-    "nuxt": "^3.7.4"
+    "nuxt": "^3.7.4",
+    "@prisma/client": "5.3.1",
+    "graphql": "^16.8.1",
+    "graphql-type-json": "^0.3.2",
+    "graphql-yoga": "^4.0.4",
+    "prisma": "^5.3.1"
   },
   "dependencies": {
-    "@prisma/client": "5.3.1",
+    "@bg-dev/nuxt-naiveui": "^1.4.6",
     "@tiptap/extension-table": "^2.1.11",
     "@tiptap/extension-table-cell": "^2.1.11",
     "@tiptap/extension-table-header": "^2.1.11",
     "@tiptap/extension-table-row": "^2.1.11",
     "@tiptap/pm": "^2.1.11",
     "@tiptap/starter-kit": "^2.1.11",
-    "@tiptap/vue-3": "^2.1.11",
-    "graphql": "^16.8.1",
-    "graphql-type-json": "^0.3.2",
-    "graphql-yoga": "^4.0.4",
-    "prisma": "^5.3.1"
+    "@tiptap/vue-3": "^2.1.11"
   }
 }

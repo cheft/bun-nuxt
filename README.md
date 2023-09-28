@@ -70,7 +70,13 @@ yarn preview
 
 # bun
 bun run preview
+/home/lighthouse/bun-nuxt/package.json
+# production
+bun install -g pm2
+bun install -g cross-env
+bun run prod
 ```
+
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
 
