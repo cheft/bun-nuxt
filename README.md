@@ -82,7 +82,21 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ## Prisma
 ```bash
+npx prisma migrate dev --name init
+
 bunx prisma generate
 
 bunx prisma studio
+```
+
+
+```js
+let villages = []
+document.querySelectorAll('tspan').forEach((e)=> {
+//   console.log(e.textContent)
+  if (!e.textContent.includes('（')) {
+    villages.push(e.textContent)
+  }
+})
+console.log(villages)
 ```

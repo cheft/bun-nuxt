@@ -10,7 +10,6 @@
     Doc,
     Text,
     Paragraph,
-
   } from 'element-tiptap-vue3-fixed';
 
   export default {
@@ -22,7 +21,6 @@
           new Doc(),
           new Text(),
           new Paragraph(),
-
         ],
         // editor's content
         content: `

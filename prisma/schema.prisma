@@ -29,8 +29,15 @@ model Village {
   name       String
   desc       String
   networkNum Int
-  graphIndex Int
-  nameIndex  Int
-  creator    Int
-  updateTime DateTime
+  creator    Int?
+  updateTime DateTime?
+}
+
+model VillageMark {
+  id         Int      @id @default(autoincrement())
+  name       String
+  desc       String
+  networkNum Int
+  creator    Int?
+  updateTime DateTime?
 }

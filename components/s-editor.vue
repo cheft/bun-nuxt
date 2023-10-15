@@ -53,8 +53,9 @@
         :disabled="!editor.can().toggleHeaderRow()">
         toggleHeaderRow
       </button> -->
-      
-      <button text  @click="editor.chain().focus().toggleHeaderCell().run()" :disabled="!editor.can().toggleHeaderCell()">
+
+      <button text @click="editor.chain().focus().toggleHeaderCell().run()"
+        :disabled="!editor.can().toggleHeaderCell()">
         切换表头
       </button>
 
@@ -62,8 +63,7 @@
         :disabled="!editor.can().toggleHeaderCell()">
         toggleHeaderCell
       </button> -->
-      <button text @click="editor.chain().focus().mergeOrSplit().run()"
-        :disabled="!editor.can().mergeOrSplit()">
+      <button text @click="editor.chain().focus().mergeOrSplit().run()" :disabled="!editor.can().mergeOrSplit()">
         合并/分离
       </button>
       <button text @click="toggleList">
@@ -133,7 +133,7 @@
 
   export default {
     props: ['content'],
-
+    emits: ['update:content'],
     components: {
       EditorContent,
     },
@@ -162,7 +162,10 @@
           // Custom TableCell with backgroundColor attribute
           CustomTableCell,
         ],
-        content: this.content
+        content: this.content,
+
+        onUpdate: this.onUpdate
+
       })
     },
 
@@ -170,160 +173,175 @@
       this.editor.destroy()
     },
 
+    // setup(props) {
+    //   const onUpdate = (editor) => {
+    //     const html = editor.editor.getHTML();
+
+    //     console.log(props.content, 1111)
+    //   }
+    // },
+
     methods: {
+      onUpdate(editor) {
+        const html = editor.editor.getHTML();
+        // console.log(html)
+        // this.content = html
+        this.$emit('update:content', html)
+      },
+
       toggleText(e) {
-      if (text === 0) {
-        this.editor.chain().focus().toggleHeading({ level: 1 }).run()
-        text++
-      } else if (text === 1) {
-        this.editor.chain().focus().toggleHeading({ level: 2 }).run()
-        text++
-      } else if (text === 2) {
-        this.editor.chain().focus().toggleHeading({ level: 3 }).run()
-        text++
-      } else if (text === 3) {
-        this.editor.chain().focus().setParagraph({ level: 3 }).run()
-        text = 0
-      }
-    },
+        if (text === 0) {
+          this.editor.chain().focus().toggleHeading({ level: 1 }).run()
+          text++
+        } else if (text === 1) {
+          this.editor.chain().focus().toggleHeading({ level: 2 }).run()
+          text++
+        } else if (text === 2) {
+          this.editor.chain().focus().toggleHeading({ level: 3 }).run()
+          text++
+        } else if (text === 3) {
+          this.editor.chain().focus().setParagraph({ level: 3 }).run()
+          text = 0
+        }
+      },
 
-    toggleAlign(e) {
-      if (align === 0) {
-        this.editor.commands.setTextAlign('left')
-        align++
-      } else if (align === 1) {
-        this.editor.commands.setTextAlign('center')
-        align++
-      } else if (align === 2) {
-        this.editor.commands.setTextAlign('right')
-        align = 0
-      }
-    },
+      toggleAlign(e) {
+        if (align === 0) {
+          this.editor.commands.setTextAlign('left')
+          align++
+        } else if (align === 1) {
+          this.editor.commands.setTextAlign('center')
+          align++
+        } else if (align === 2) {
+          this.editor.commands.setTextAlign('right')
+          align = 0
+        }
+      },
 
-    toggleList(e) {
-      if (list === 0) {
-        this.editor.chain().focus().toggleBulletList().run()
-        list++
-      } else if (list === 1) {
-        this.editor.chain().focus().toggleOrderedList().run()
-        list++
-      } else if (list === 2) {
-        this.editor.chain().focus().toggleOrderedList().run()
-        list = 0
+      toggleList(e) {
+        if (list === 0) {
+          this.editor.chain().focus().toggleBulletList().run()
+          list++
+        } else if (list === 1) {
+          this.editor.chain().focus().toggleOrderedList().run()
+          list++
+        } else if (list === 2) {
+          this.editor.chain().focus().toggleOrderedList().run()
+          list = 0
+        }
       }
     }
   }
-  
-}
 </script>
 
 <style>
-    button {
-      font-size: 12px;
-      color: #000;
-      margin: 0.1rem;
-      border: 1px solid black;
-      border-radius: 0.3rem;
-      padding: 0.1rem 0.4rem;
-      background: #fefefe;
-      accent-color: black;
-    }
-    
-  
-    .tiptap {
-      outline: none;
-      border: none;
-      height: 360px;
-      overflow: auto;
-    }
+  button {
+    font-size: 12px;
+    color: #000;
+    margin: 0.1rem;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    padding: 0.1rem 0.4rem;
+    background: #fefefe;
+    accent-color: black;
+  }
 
-    h1 {
-      font-size: 22px;
-      margin: 4px;
-    }
 
-    h2 {
-      font-size: 18px;
-      margin: 2px;
-    }
+  .tiptap {
+    outline: none;
+    border: none;
+    height: 360px;
+    overflow: auto;
+  }
 
-    h3 {
-      font-size: 16px;
-      margin: 0px;
-    }
+  h1 {
+    font-size: 22px;
+    margin: 4px;
+  }
 
-    p {
-      font-size: 12px;
-      margin: 0px;
-    }
-    
-    hr {
-      border-top: 1px solid #fefefe;
-    }
+  h2 {
+    font-size: 18px;
+    margin: 2px;
+  }
 
-    ol,
-    ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-  
-    table {
-      border-collapse: collapse;
-      table-layout: fixed;
-      width: 100%;
-      margin: 0;
-      overflow: hidden;
-    }
-  
-    td,
-    th {
-      min-width: 1em;
-      border: 2px solid #fefefe;
-      padding: 3px 5px;
-      box-sizing: border-box;
-      position: relative;
-    }
-  
-    th {
-      font-weight: bold;
-      color: #a92e2b;
-      background: #cdac86;
-    }
-  
-    .selectedCell:after {
-      z-index: 2;
-      position: absolute;
-      content: "";
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      background: rgba(200, 200, 255, 0.4);
-      pointer-events: none;
-    }
-  
-    .column-resize-handle {
-      position: absolute;
-      right: -2px;
-      top: 0;
-      bottom: -2px;
-      width: 4px;
-      background-color: #adf;
-      pointer-events: none;
-    }
-  
-    p {
-      margin: 0;
-    }
-  
-    .tableWrapper {
-      overflow-x: auto;
-    }
-  
-    .resize-cursor {
-      cursor: ew-resize;
-      cursor: col-resize;
-    } 
+  h3 {
+    font-size: 16px;
+    margin: 0px;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 0px;
+  }
+
+  hr {
+    border-top: 1px solid #fefefe;
+  }
+
+  ol,
+  ul {
+    margin: 0;
+    padding: 0 4px;
+    list-style: none;
+  }
+
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  td,
+  th {
+    min-width: 1em;
+    border: 2px solid #fefefe;
+    padding: 3px 5px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  th {
+    font-weight: bold;
+    color: #a92e2b;
+    background: #cdac86;
+  }
+
+  .selectedCell:after {
+    z-index: 2;
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(200, 200, 255, 0.4);
+    pointer-events: none;
+  }
+
+  .column-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: -2px;
+    width: 4px;
+    background-color: #adf;
+    pointer-events: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+
+  .resize-cursor {
+    cursor: ew-resize;
+    cursor: col-resize;
+  }
 
   /* .el-tiptap-editor__content {
     width: 800px;
