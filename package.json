@@ -17,14 +17,14 @@
   },
   "dependencies": {
     "@bg-dev/nuxt-naiveui": "^1.4.6",
-    "@tiptap/extension-table": "^2.1.11",
-    "@tiptap/extension-table-cell": "^2.1.11",
-    "@tiptap/extension-table-header": "^2.1.11",
-    "@tiptap/extension-table-row": "^2.1.11",
-    "@tiptap/extension-text-align": "^2.1.11",
-    "@tiptap/pm": "^2.1.11",
-    "@tiptap/starter-kit": "^2.1.11",
-    "@tiptap/vue-3": "^2.1.11",
+    "@tiptap/extension-table": "^v2.2.0-rc.4",
+    "@tiptap/extension-table-cell": "^v2.2.0-rc.4",
+    "@tiptap/extension-table-header": "^v2.2.0-rc.4",
+    "@tiptap/extension-table-row": "^v2.2.0-rc.4",
+    "@tiptap/extension-text-align": "^v2.2.0-rc.4",
+    "@tiptap/pm": "^v2.2.0-rc.4",
+    "@tiptap/starter-kit": "^v2.2.0-rc.4",
+    "@tiptap/vue-3": "^v2.2.0-rc.4",
     "element-tiptap-vue3-fixed": "^1.2.3"
   }
 }

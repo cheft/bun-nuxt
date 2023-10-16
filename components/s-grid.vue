@@ -1323,7 +1323,7 @@
   })
 
   const onFetched = () => {
-    data && data.value.forEach((d) => {
+    data.value && data.value.forEach((d) => {
       villages.value[d.name] = d
     })
     console.log(villages, 1111);
