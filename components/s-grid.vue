@@ -1260,6 +1260,8 @@
         </svg>
       </div>
 
+      <img class="left-arrow" src="@/assets/left-arrow.svg" @click="toRight">
+
       <n-popover :show="showPopover" :x="x" :y="y" trigger="manual" @keydown.esc="closePopover" tabindex="0">
         <div class="popover-container">
           <div class="header">
@@ -1419,6 +1421,10 @@
     await refresh()
     onFetched()
   }
+
+  const toRight = () => {
+    return navigateTo('/')
+  }
 </script>
 
 <style>
@@ -1552,6 +1558,16 @@
   g[fill="#D61C19"] {
     pointer-events: none;
     /* cursor: pointer; */
+  }
+
+  .left-arrow {
+    position: absolute;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    right: 50px;
+    bottom: 50px;
+    z-index: 9999;
   }
 
   .popover-container .content {

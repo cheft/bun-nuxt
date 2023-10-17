@@ -82,6 +82,8 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ## Prisma
 ```bash
+npx prisma init --datasource-provider sqlite 
+
 npx prisma migrate dev --name init
 
 bunx prisma generate

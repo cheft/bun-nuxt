@@ -25,6 +25,7 @@
     "@tiptap/pm": "^v2.2.0-rc.4",
     "@tiptap/starter-kit": "^v2.2.0-rc.4",
     "@tiptap/vue-3": "^v2.2.0-rc.4",
-    "element-tiptap-vue3-fixed": "^1.2.3"
+    "element-tiptap-vue3-fixed": "^1.2.3",
+    "vue-baidu-map-3x": "^1.0.35"
   }
 }
