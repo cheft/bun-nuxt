@@ -1571,7 +1571,7 @@
   }
 
   .popover-container .content {
-    /* width: 600px; */
+    /* max-width: 868px; */
     height: 360px;
     overflow: auto;
   }

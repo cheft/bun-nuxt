@@ -63,7 +63,7 @@
             </div>
             <div class="body" style="max-width:800px;">
               <s-editor v-if="editable" v-model:content="content" />
-              <div v-else v-html="content" class="el-tiptap-editor__content content"></div>
+              <div v-else v-html="content" class="el-tiptap-editor__content content2"></div>
             </div>
           </div>
         </n-popover>
@@ -259,19 +259,19 @@
     height: 50px;
   }
 
-  .popover-container h3 {
+  .popover-container .content2 h3 {
     font-size: 24px;
     font-weight: bold;
     padding: 16px 0;
   }
 
-  .popover-container p {
+  .popover-container .content2 p {
     font-size: 14px;
     padding: 8px 0;
   }
 
-  .popover-container .content {
-    width: 680px;
+  .popover-container .content2 {
+    max-width: 680px;
     height: 360px;
     overflow: auto;
   }
