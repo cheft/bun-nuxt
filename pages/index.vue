@@ -7,7 +7,7 @@
           <div class="text">
             <pre class="cn">
 苏溪镇
-网格
+党组织
 分布图</pre>
             <!-- <pre class="cn">苏溪镇
     党建统领网格智治
@@ -18,24 +18,14 @@
     Schematic Diagram</pre> -->
           </div>
         </div>
-        <baidu-map class="map" ak="jvGhUbUTMYNeHrwvq6mKV2xTjKZp3Hda" v="3.0" type="API" @click="closePopover"
-          :center="{lng: 120.154778, lat: 29.417782}" :zoom="15" mapType="BMAP_HYBRID_MAP" :scroll-wheel-zoom="true">
+        <baidu-map class="map" ak="jvGhUbUTMYNeHrwvq6mKV2xTjKZp3Hda" v="3.0" type="API" @click="closePopover" @touchend="closePopover"
+          :center="{lng: 120.137897, lat: 29.41603}" :zoom="15" mapType="BMAP_HYBRID_MAP" :scroll-wheel-zoom="true">
           <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
 
-          <!-- <my-overlay :position="{lng: 120.154778, lat: 29.417782}" text="点击我11111111111111111111111111" :active="active"
-        @mouseover.native="active = true" @mouseleave.native="active = false">
-      </my-overlay> -->
-
-          <bm-overlay pane="labelPane" :class="{sample: true, active}" @draw="draw" @mouseover="active = true"
-            @mouseleave="active = false" @click="handlePopover">
+          <bm-overlay v-for="v in villages" :id="v.name" pane="labelPane" :class="{sample: true, active}" @draw="(e) => { draw(e, v) }" @mouseover="active = true"
+            @mouseleave="active = false" @click="(e) => {handlePopover(e, v)}" @touchend="(e) => {handlePopover(e, v)}">
             <img src="@/assets/icon-yellow.svg" />
-            <div>南极星制衣支部</div>
-          </bm-overlay>
-
-          <bm-overlay pane="labelPane" :class="{sample: true, active}" @draw="draw2" @mouseover="active = true"
-            @mouseleave="active = false" @click="handlePopover">
-            <img src="@/assets/icon-yellow.svg" />
-            <div>曲艺团支部</div>
+            <div>{{v.name}}</div>
           </bm-overlay>
 
           <!-- <bm-boundary name="浙江省金华市义务市苏溪镇" :strokeWeight="2" strokeColor="blue"></bm-boundary> -->
@@ -48,8 +38,8 @@
             <div class="header">
               <img class="logo" src="@/assets/icon.svg" />
               <div v-if="editable" class="tools">
-                <input type="hidden" :value="editId"/>
-  
+                <input type="hidden" :value="editId" />
+
                 <div class="network">
                   <n-input v-model:value="editNetworkNum" type="text" placeholder="" />
                   个网格
@@ -59,7 +49,7 @@
                   保存修改
                 </n-button>
               </div>
-              <div class="text">{{editName}}</div>
+              <div class="text">江南共建委 —— {{editName}}</div>
             </div>
             <div class="body" style="max-width:800px;">
               <s-editor v-if="editable" v-model:content="content" />
@@ -73,11 +63,11 @@
 </template>
 
 <script setup>
+  // https://api.map.baidu.com/lbsapi/getpoint/index.html 地图坐标拾取
   // BMAP_NORMAL_MAP BMAP_SATELLITE_MAP BMAP_HYBRID_MAP
   import { ref } from 'vue'
   import { NPopover } from 'naive-ui'
   import { BaiduMap, BmNavigation, BmOverlay } from 'vue-baidu-map-3x'
-  // import MyOverlay from '../components/my-overlay.vue'
 
   const active = ref(false);
 
@@ -86,7 +76,59 @@
   const x = ref(0)
   const y = ref(0)
 
-  const villages = ref({})
+  const villages = ref([
+    // content: '<h3></h3><p></p><h3></h3><p></p><h3></h3><p></p>'
+    {name: '十合里社区', lng: 120.153176, lat: 29.402931, content: '<h3>村社简介</h3><p>十和里社区，面积1.8平方千米，现有户籍人口5617人，常住人口6500人，流动人口8500人。村（社区）内特色产业为/，年集体收入为/万元。</p><h3>村社党群服务中心简介</h3><p>十和里社区党群服务中心位于苏溪镇阳光大道M18号，面积        1400平方米，设有共享法庭、退役军人服务站、青年之家、民事议事堂等功能区块，年组织活动100场，年参与活动3100人次。</p><h3>党组织简介</h3><p>十和里社区党委，四星级党组织，下辖8个支部（党总支、社区党委填写即可），现有正式党员157人，预备党员2人，流动党员103人。</p>'},
+    // {name: '天能光合', lng: 120.169158, lat: 29.405486},
+    // {name: '东方日升', lng: 120.18235, lat: 29.397243},
+    // {name: '超凡', lng: 120.168212, lat: 29.397472},
+    {name: '溪北村', lng: 120.16968, lat: 29.421157, content: '<h3>村社简介</h3><p>溪北  村（社区），面积 1.3 平方千米，现有户籍人口 1383 人，常住人口   1800 人，流动人口   700  人。村（社区）内特色产业为  无   ，年集体收入为   60   万元。</p><h3>村社党群服务中心简介</h3><p>溪北  村（社区）党群服务中心位于    溪北村     ，面积  200  平方米，设有 会议室 功能区块，年组织活动 20余   场，年参与活动 2000 人次。</p><h3>党组织简介</h3><p>溪北村  党委， 三 星级党组织，下辖 2 个支部（党总支、社区党委填写即可），现有正式党员 71 人，预备党员 0 人，流动党员 6 人。</p>'},
+    // {name: '里宅', lng: 120.18235, lat: 29.397243},
+    // {name: '和谐明芯', lng: 120.176413, lat: 29.405363},
+    {name: '范家村', lng: 120.185959, lat: 29.399406},
+    {name: '上甘村', lng: 120.183388, lat: 29.394707},
+    {name: '杜村', lng: 120.093504, lat: 29.433103},
+    {name: '新院村', lng: 120.14083, lat: 29.424968},
+    {name: '三联村', lng: 120.157532, lat: 29.430803},
+    {name: '东青村', lng: 120.107899, lat: 29.430078},
+    {name: '邢宅村', lng: 120.122161, lat: 29.441168},
+    {name: '齐山楼村', lng: 120.151659, lat: 29.422459},
+    {name: '后店村', lng: 120.147083, lat: 29.422984},
+    {name: '东洪村', lng: 120.14308, lat: 29.390176},
+    {name: '塘头应村', lng: 120.153667, lat: 29.386468},
+    {name: '新厅村', lng: 120.187142, lat: 29.387618},
+    {name: '苏港村', lng: 120.162654, lat: 29.385204},
+    {name: '高岭村', lng: 120.15211, lat: 29.391875},
+    {name: '西山下村', lng: 120.174391, lat: 29.39845},
+    {name: '新乐村', lng: 120.127883, lat: 29.432011},
+    {name: '洪流村', lng: 120.114944, lat: 29.422459},
+    {name: '马丁村', lng: 120.131722, lat: 29.40619},
+    {name: '龙祈社区', lng: 120.139202, lat: 29.406828},
+    // {name: '爱旭', lng: 120.165364, lat: 29.410898},
+    {name: '翁界村', lng: 120.182712, lat: 29.422483},
+    {name: '上西陶村', lng: 120.130231, lat: 29.448391},
+    {name: '东风社区', lng: 120.143406, lat: 29.413794},
+    {name: '徐丰村', lng: 120.125437, lat: 29.40359},
+    {name: '东陶村', lng: 120.143421, lat: 29.384948},
+    {name: '密溪村', lng: 120.103441, lat: 29.416736},
+    {name: '同裕村', lng: 120.174531, lat: 29.438945},
+    {name: '下屋村', lng: 120.170964, lat: 29.41789},
+    {name: '六都村', lng: 120.153887, lat: 29.413972},
+    {name: '立塘村', lng: 120.117458, lat: 29.413234},
+    {name: '胡宅社区', lng: 120.13233, lat: 29.420724},
+    {name: '龙华村', lng: 120.113318, lat: 29.404571},
+    {name: '青春村', lng: 120.130231, lat: 29.448391},
+    {name: '枢纽港', lng: 120.137897, lat: 29.41603},
+    {name: '塘里蒋村', lng: 120.136408, lat: 29.437678},
+    {name: '湾头下村', lng: 120.126132, lat: 29.391933},
+    {name: '里宅村', lng: 120.150187, lat: 29.395225},
+    {name: '联合村', lng: 120.159893, lat: 29.440348},
+    {name: '蒋宅村', lng: 120.135303, lat: 29.424943},
+    {name: '同春村', lng: 120.149048, lat: 29.446108},
+    {name: '下陈村', lng: 120.176486, lat: 29.388838},
+    {name: '上娄村', lng: 120.143917, lat: 29.437273},
+    {name: '殿下村', lng: 120.162318, lat: 29.414793},
+  ])
 
   const editable = ref(false)
   const editId = ref(0)
@@ -107,23 +149,37 @@
   <p>东青村党支部， 三星级党组织，现有正式党员 29 人，预备党员1 人，流动党员 0 人。</p>
   `)
 
+  useHead({
+    title: '苏溪镇党组织分布图',
+    meta: [{
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=0.5,user-scalable=yes,maximum-scale=4',
+    }]
+  })
 
-  const draw = ({ el, BMap, map }) => {
-    const pixel = map.pointToOverlayPixel(new BMap.Point(120.12778, 29.417782))
+  const draw = (e, v) => {
+    const { el, BMap, map } = e;
+    const pixel = map.pointToOverlayPixel(new BMap.Point(v.lng, v.lat))
     el.style.left = pixel.x - 60 + 'px'
     el.style.top = pixel.y - 20 + 'px'
   };
 
-  const draw2 = ({ el, BMap, map }) => {
-    const pixel = map.pointToOverlayPixel(new BMap.Point(120.164778, 29.427782))
-    el.style.left = pixel.x - 60 + 'px'
-    el.style.top = pixel.y - 20 + 'px'
-  };
 
-  const handlePopover = (e) => {
+  const handlePopover = (e, v) => {
+    // console.log(e, 111)
     showPopover.value = true
-    x.value = e.clientX
-    y.value = e.clientY
+    if (v.content) {
+      content.value = v.content
+    }
+    editName.value = v.name
+    if (e.clientX) {
+      x.value = e.clientX
+      y.value = e.clientY
+    } else if (e.changedTouches && e.changedTouches[0]) {
+      x.value = e.changedTouches[0].clientX
+      y.value = e.changedTouches[0].clientY
+    }
+
     e.stopPropagation()
   }
 
@@ -137,7 +193,7 @@
 </script>
 
 <style>
-   body {
+  body {
     margin: 0;
     overflow: hidden;
     min-height: 100vh;
@@ -149,7 +205,7 @@
     left: 0;
     display: flex;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.4 );
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(6px);
     padding: 10px 30px 10px 0;
   }
@@ -228,7 +284,7 @@
 
   .n-popover {
     background: #B71C24 !important;
-    border-radius: 30px !important;
+    border-radius: 20px !important;
     color: #ffffff;
     --n-space-arrow: 20px !important;
     --n-arrow-height: 20px !important;
@@ -246,12 +302,13 @@
   .popover-container .header {
     display: flex;
     justify-content: space-between;
-    font-size: 24px;
-    font-weight: 900;
+    font-size: 36px;
+    font-weight: bold;
     color: #D5AB81;
-    align-items: center;
-    /* margin-bottom: 10px; */
-    /* border-bottom: 2px solid #D5AB81; */
+    align-items: baseline;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #D5AB81;
   }
 
   .popover-container .header .logo {
@@ -260,13 +317,14 @@
   }
 
   .popover-container .content2 h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
-    padding: 16px 0;
+    padding-top: 16px;
   }
 
   .popover-container .content2 p {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 22px;
     padding: 8px 0;
   }
 

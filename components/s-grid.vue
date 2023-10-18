@@ -1328,7 +1328,13 @@
     data.value && data.value.forEach((d) => {
       villages.value[d.name] = d
     })
-    console.log(villages, 1111);
+    // console.log(villages, 1111);
+
+    // var aa = []
+    // for (let v in villages.value) {
+    //   aa.push(v)
+    // }
+    // console.log(aa)
   }
 
   onMounted(() => {

@@ -4,5 +4,8 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: { gzip: true, brotli: true },
   },
+  devServer: {
+    host: '0.0.0.0',
+  }
   // devtools: { enabled: true }
 })

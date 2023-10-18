@@ -85,9 +85,21 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 bunx prisma generate
 
+bun run build
+
+cd .output/server
+
 npx prisma init --datasource-provider sqlite 
 
-npx prisma migrate dev --name init # cp data.db
+npx prisma migrate dev --name init # cp ../../../data.db prisma
+
+ps -e | grep bun & sudo kill -9 3364333
+
+cd ../../
+
+sudo bun run linux
+
+cat bun.log
 
 bunx prisma studio
 ```
