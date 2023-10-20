@@ -1281,7 +1281,7 @@
             <div class="text">{{editName}}</div>
           </div>
           <div class="body" style="max-width:800px;">
-            <s-editor v-if="editable" v-model:content="content" />
+            <s-editor name="content" v-if="editable" v-model:content="content" />
             <div v-else v-html="content" class="el-tiptap-editor__content content"></div>
           </div>
         </div>
@@ -1550,13 +1550,13 @@
     padding: 10px;
   } */
   
-  .popover-container .body h3 {
+  .popover-container .content h3 {
     font-size: 14px;
     padding-top: 0;
     font-weight: 400;
   }
   
-  .popover-container .body p {
+  .popover-container .content p {
     font-size: 12px;
     padding: 0;
   }

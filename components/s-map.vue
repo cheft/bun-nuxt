@@ -56,7 +56,7 @@
               <div class="text">{{editRegin}} —— {{editName}}</div>
             </div>
             <div class="body" style="max-width:800px;">
-              <s-editor v-if="editable" v-model:content="content" />
+              <s-editor name="content2" v-if="editable" v-model:content="content" />
               <div v-else v-html="content" class="el-tiptap-editor__content content2"></div>
             </div>
           </div>
@@ -287,16 +287,27 @@
     height: 50px;
   }
 
-  .popover-container .body h3 {
+  .popover-container .content2 h3 {
+    font-size: 20px !important;
+    font-weight: bold !important;
+    padding-top: 16px !important;
+  }
+
+  /* .popover-container .body h3 {
     font-size: 20px;
     font-weight: bold;
     padding-top: 16px;
+  } */
+
+  .popover-container .content2 p {
+    font-size: 16px !important;
+    padding: 8px 0 !important;
   }
 
-  .popover-container .body p {
+  /* .popover-container .body p {
     font-size: 16px;
     padding: 8px 0;
-  }
+  } */
 
   .popover-container .content2 {
     max-width: 680px;

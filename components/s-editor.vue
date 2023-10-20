@@ -95,7 +95,7 @@
       </button> -->
     </div>
   </naive-config>
-  <editor-content class="el-tiptap-editor__content" :editor="editor" />
+  <editor-content :class="name + ' el-tiptap-editor__content'" :editor="editor" />
 </template>
 
 <script>
@@ -132,7 +132,7 @@
   let list = 0;
 
   export default {
-    props: ['content'],
+    props: ['content', 'name'],
     emits: ['update:content'],
     components: {
       EditorContent,
