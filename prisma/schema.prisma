@@ -37,7 +37,9 @@ model VillageMark {
   id         Int      @id @default(autoincrement())
   name       String
   desc       String
-  networkNum Int
+  region     String
+  lng        Float
+  lat        Float
   creator    Int?
   updateTime DateTime?
 }

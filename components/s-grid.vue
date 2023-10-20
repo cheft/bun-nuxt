@@ -1306,12 +1306,6 @@
   const editId = ref(0)
   const editNetworkNum = ref(0)
   const editName = ref("")
-  const editDesc = ref("")
-
-  // const title = ref('东风社区')
-  // const content = ref(`
-  //     <div contenteditable="true" tabindex="0" translate="no" class="tiptap ProseMirror"><h1 style="text-align: center">网格力量“1+3+N”配备人员名单</h1><div class="tableWrapper"><table style="min-width: 649px;"><colgroup><col style="width: 87px;"><col style="width: 72px;"><col style="width: 90px;"><col style="width: 64px;"><col style="width: 90px;"><col style="width: 61px;"><col style="width: 92px;"><col style="width: 43px;"><col><col></colgroup><tbody><tr><th colspan="2" rowspan="1" colwidth="87,72"><h3>1</h3></th><th colspan="6" rowspan="1" colwidth="90,64,90,61,92,43"><h3>3</h3></th><th colspan="2" rowspan="1"><h3>N</h3></th></tr><tr><td colspan="2" rowspan="1" colwidth="87,72" style="background-color: null"><h3 style="text-align: center">网格长</h3></td><td colspan="2" rowspan="1" colwidth="90,64" style="background-color: null"><h3 style="text-align: center">网格员</h3></td><td colspan="2" rowspan="1" colwidth="90,61" style="background-color: null"><h3 style="text-align: center">兼职网格员</h3></td><td colspan="2" rowspan="1" colwidth="92,43" style="background-color: null"><h3 style="text-align: center">网格指导员</h3></td><td colspan="2" rowspan="1" style="background-color: null"><h3 style="text-align: center">其他包联人员</h3></td></tr><tr><td colspan="1" rowspan="1" colwidth="87" style="background-color: null"><p style="text-align: center">姓名</p></td><td colspan="1" rowspan="1" colwidth="72" style="background-color: null"><p style="text-align: center">身份</p></td><td colspan="1" rowspan="1" colwidth="90" style="background-color: null"><p style="text-align: center">姓名</p></td><td colspan="1" rowspan="1" colwidth="64" style="background-color: null"><p style="text-align: center">身份</p></td><td colspan="1" rowspan="1" colwidth="90" style="background-color: null"><p style="text-align: center">姓名</p></td><td colspan="1" rowspan="1" colwidth="61" style="background-color: null"><p style="text-align: center">身份</p></td><td colspan="1" rowspan="1" colwidth="92" style="background-color: null"><p style="text-align: center">姓名</p></td><td colspan="1" rowspan="1" colwidth="43" style="background-color: null"><p style="text-align: center">身份</p></td><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">姓名</p></td><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">身份</p></td></tr><tr><td colspan="1" rowspan="1" colwidth="87" style="background-color: null"><p style="text-align: center">楼正东</p><p style="text-align: center">13757901745</p></td><td colspan="1" rowspan="1" colwidth="72" style="background-color: null"><p style="text-align: center">村(社区)</p><p style="text-align: center">党组织书记</p></td><td colspan="1" rowspan="1" colwidth="90" style="background-color: null"><p style="text-align: center">何治军 13516845602</p></td><td colspan="1" rowspan="1" colwidth="64" style="background-color: null"><p style="text-align: center">村“两委”</p><p style="text-align: center">干部</p></td><td colspan="1" rowspan="1" colwidth="90" style="background-color: null"><p style="text-align: center">罗良菊 13676812006</p></td><td colspan="1" rowspan="1" colwidth="61" style="background-color: null"><p style="text-align: center">村“两委”</p><p style="text-align: center">干部</p></td><td colspan="1" rowspan="1" colwidth="92" style="background-color: null"><p style="text-align: center">王飞</p><p style="text-align: center">13429033238</p></td><td colspan="1" rowspan="1" colwidth="43" style="background-color: null"><p style="text-align: center">联村干部</p></td><td colspan="2" rowspan="1" style="background-color: null"><ul><li><p>城管: 吴东 15067052688</p></li><li><p>行政执法:叶湘照13777511101</p></li><li><p>卫生院: 何扬15058672691</p></li><li><p>交通执法:骆江舟13606891656</p></li><li><p>市场监管:金璐18858944066</p></li><li><p>交警: 朱志强13588679083</p></li><li><p>派出所: 孙今朝14757885791</p></li></ul></td></tr></tbody></table></div><p><br class="ProseMirror-trailingBreak"></p><h1 style="text-align: center">微网格设置情况</h1><div class="tableWrapper"><table style="min-width: 75px;"><colgroup><col><col><col></colgroup><tbody><tr><th colspan="1" rowspan="1"><h3>微网格</h3></th><th colspan="1" rowspan="1"><h3>微网格长</h3></th><th colspan="1" rowspan="1"><h3>微网格治理 团队</h3></th></tr><tr><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">东青1-1微网格</p></td><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">楼齐山 15957930430</p></td><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">楼成森、吕奇、俞庆远、蒋天勇</p></td></tr><tr><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">东青1-2微网格</p></td><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">罗良菊 13676812006</p></td><td colspan="1" rowspan="1" style="background-color: null"><p style="text-align: center">楼成森 、吕奇、俞庆远、蒋天勇</p></td></tr></tbody></table></div></div>
-  //     `);
   const content = ref('')
 
   let msg = ""
@@ -1554,15 +1548,18 @@
     margin-top: 10px;
     border: 2px solid #D5AB81;
     padding: 10px;
-  }
+  } */
   
   .popover-container .body h3 {
     font-size: 14px;
+    padding-top: 0;
+    font-weight: 400;
   }
   
   .popover-container .body p {
     font-size: 12px;
-  } */
+    padding: 0;
+  }
 
   g[fill="#D61C19"] {
     pointer-events: none;
