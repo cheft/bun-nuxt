@@ -1368,19 +1368,22 @@
         // e.srcElement.setAttribute("name", lastName)
         // console.log(e.srcElement, 111);
         let name = e.srcElement.attributes.name;
-        editName.value = name ? name.value : ''
-        console.log(editName.value, villages.value, villages.value[editName.value], 111);
-        editId.value = villages.value[editName.value]?.id;
-        editNetworkNum.value = villages.value[editName.value]?.networkNum;
-        content.value = villages.value[editName.value]?.desc;
-        if (!isView) {
-          editable.value = true
-        }
-        e.srcElement.setAttribute('style', 'fill:#E1BABA;stroke:#E1BABA;')
+        if (name && name.value) {
+          editName.value = name.value
+          console.log(editName.value, villages.value, villages.value[editName.value], 111);
+          editId.value = villages.value[editName.value]?.id;
+          editNetworkNum.value = villages.value[editName.value]?.networkNum;
+          content.value = villages.value[editName.value]?.desc;
+          if (!isView) {
+            editable.value = true
+          }
+          e.srcElement.setAttribute('style', 'fill:#E1BABA;stroke:#E1BABA;')
 
-        showPopover.value = true
-        x.value = e.clientX
-        y.value = e.clientY
+          showPopover.value = true
+          x.value = e.clientX
+          y.value = e.clientY
+        }
+        
         e.stopPropagation()
       }
     }
@@ -1533,8 +1536,8 @@
     font-weight: 900;
     color: #D5AB81;
     align-items: center;
-    /* margin-bottom: 10px; */
-    /* border-bottom: 2px solid #D5AB81; */
+    margin-bottom: 0;
+    border-bottom: none;
   }
 
   .popover-container .header .logo {
