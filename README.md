@@ -91,7 +91,7 @@ cd .output/server
 
 npx prisma init --datasource-provider sqlite 
 
-npx prisma migrate dev --name init # cp ../../../data.db prisma
+npx prisma migrate dev --name init # cp ../../prisma/data.db prisma
 
 ps -e | grep bun & sudo kill -9 3364333
 
